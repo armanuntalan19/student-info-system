@@ -25,7 +25,7 @@ function readForm() {
   };
   if (!s.name || !s.age || !s.course || !s.email) return { error: "All fields are required" };
   if (!Number.isInteger(Number(s.age))) return { error: "Age must be a whole number" };
-  if (s.age < 1 || s.age > 120) return { error: "Age must be 1 to 120" };
+  if (s.age < 1 || s.age > 120) return { error: "Age must be a number from 1 to 120" };
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(s.email)) return { error: "Email is not valid" };
   s.age = Number(s.age);
   return { student: s };
