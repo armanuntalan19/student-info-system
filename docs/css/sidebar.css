@@ -112,7 +112,7 @@ body.has-sidebar.sidebar-collapsed {
 }
 
 .sidebar-link i {
-  font-size: 14px;
+  font-size: 18px;
   min-width: 20px;
   flex-shrink: 0;
 }
@@ -157,7 +157,7 @@ body.has-sidebar.sidebar-collapsed {
 }
 
 .nav-action-btn i {
-  font-size: 14px;
+  font-size: 18px;
   min-width: 20px;
   flex-shrink: 0;
 }
