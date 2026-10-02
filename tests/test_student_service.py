@@ -39,6 +39,9 @@ class TestStudentService(unittest.TestCase):
         self.assertEqual(len(self.service.get_all("ana")), 1)
         self.assertEqual(len(self.service.get_all("xyz")), 0)
 
+    def test_delete_not_found(self):
+        with self.assertRaises(LookupError):
+            self.service.delete(999)
 
 if __name__ == "__main__":
     unittest.main()
