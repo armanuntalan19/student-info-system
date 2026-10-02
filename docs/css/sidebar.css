@@ -48,6 +48,7 @@ body.has-sidebar.sidebar-collapsed {
   color: #fff;
   flex: 1;
   min-width: 0;
+  text-decoration: none;
 }
 
 .sidebar-logo {
@@ -107,10 +108,11 @@ body.has-sidebar.sidebar-collapsed {
   border-radius: 10px;
   white-space: nowrap;
   overflow: hidden;
+  text-decoration: none;
 }
 
 .sidebar-link i {
-  font-size: 18px;
+  font-size: 14px;
   min-width: 20px;
   flex-shrink: 0;
 }
@@ -155,7 +157,7 @@ body.has-sidebar.sidebar-collapsed {
 }
 
 .nav-action-btn i {
-  font-size: 18px;
+  font-size: 14px;
   min-width: 20px;
   flex-shrink: 0;
 }
