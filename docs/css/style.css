@@ -1,0 +1,59 @@
+/* Shared page styles */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background: #f4f6fb;
+  color: #27365f;
+  line-height: 1.5;
+}
+
+.page-main { padding: 30px; }
+
+h1 { margin-bottom: 20px; }
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px; text-align: left; border-bottom: 1px solid #e3e7f0; }
+th { background: #27365f; color: white; }
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 15px;
+  border: 1.5px solid #d5dbe8;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+input:focus { outline: none; border-color: #27365f; }
+
+label { font-size: 13px; font-weight: 600; }
+
+.btn {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  background: #27365f;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: inherit;
+  display: inline-block;
+}
+.btn-edit { background: #2a7f62; }
+.btn-delete { background: #c0392b; }
+
+.message { margin-top: 10px; font-weight: bold; }
+.error { color: #c0392b; }
+.success { color: #2a7f62; }
+.big-number { font-size: 40px; color: #e07b39; font-weight: 700; }
