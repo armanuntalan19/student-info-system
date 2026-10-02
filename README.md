@@ -37,3 +37,5 @@ Open `docs/index.html` in your browser.
 ```
 python -m unittest discover tests
 ```
+## Live Demo
+https://armanuntalan19.github.io/student-info-system/
