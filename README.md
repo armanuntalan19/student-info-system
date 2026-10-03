@@ -11,14 +11,14 @@ https://armanuntalan19.github.io/student-info-system/
 
 ## Features
 - Add, view, update and delete students
-- The admin types the **Student ID** (it must be a new number)
+- The admin types the **Student ID**: exactly 7 digits, and it must be new
 - Search students (by ID, name or course)
-- Data validation (required fields, ID, age 1 to 120, email format)
+- Data validation (required fields, 7-digit ID, age 1 to 120, email must end with `@panpacificu.edu.ph`)
 - Config file (`config/config.json`) and log file (`logs/app.log`)
 - Error handling and error recovery (a broken data file is backed up as `.bak`, saving uses a temp file)
 - Unit tests
 - Export students to JSON (web version)
-- Responsive web design (phone, iPad and desktop)
+- Responsive web design (phone, iPad and desktop) with a sidebar toggle button
 
 ## Project Structure
 ```
@@ -28,7 +28,7 @@ src/        -> Python code
   utils/    -> config loader and logger
   main.py   -> console menu
 data/       -> students.json (used by the console app)
-config/     -> config.json
+config/     -> config.json (file paths; defaults are used if the file is missing)
 logs/       -> app.log
 tests/      -> unit tests
 css/        -> style.css (page) and nav.css (sidebar)
