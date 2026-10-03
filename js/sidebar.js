@@ -16,21 +16,20 @@ function initSidebar() {
   // Make one link for each page in NAV_LINKS
   const linksHtml = NAV_LINKS.map(item => `
     <a class="nav-link ${activePage === item.key ? "active" : ""}" href="${item.href}">
-      <i class="ti ${item.icon}"></i><span class="label">${item.label}</span>
+      <i class="ti ${item.icon}"></i><span>${item.label}</span>
     </a>`).join("");
 
   // Put the sidebar HTML inside <nav id="nav">
   nav.innerHTML = `
-    <button type="button" class="nav-toggle" id="toggleBtn" aria-label="Toggle menu"><i class="ti ti-chevron-left"></i></button>
     <a class="nav-brand" href="index.html">
       <img src="images/logo1.png" alt="Logo">
-      <div class="label"><strong>Student System</strong><small>Information System</small></div>
+      <div><strong>Student System</strong><small>Information System</small></div>
     </a>
     <div class="nav-links">${linksHtml}</div>
     <div class="nav-bottom">
-      <button type="button" class="nav-btn" id="exportBtn"><i class="ti ti-download"></i><span class="label">Export JSON</span></button>
-      <button type="button" class="nav-btn danger" id="clearBtn"><i class="ti ti-trash"></i><span class="label">Clear All Data</span></button>
-      <div class="nav-user"><div class="nav-avatar">AD</div><span class="label">Admin</span></div>
+      <button type="button" class="nav-btn" id="exportBtn"><i class="ti ti-download"></i>Export JSON</button>
+      <button type="button" class="nav-btn danger" id="clearBtn"><i class="ti ti-trash"></i>Clear All Data</button>
+      <div class="nav-user"><div class="nav-avatar">AD</div>Admin</div>
     </div>`;
 
   wireSidebar();
@@ -41,20 +40,16 @@ function wireSidebar() {
   const nav = document.getElementById("nav");
   const overlay = document.getElementById("overlay");   // dark area behind the open menu
 
-  // The toggle button:
-  // - on a computer it makes the sidebar small (icons only) or big again
-  // - on a tablet or phone it opens and closes the sidebar
-  function toggleMenu() {
-    if (window.innerWidth <= 900) {
-      nav.classList.toggle("open");        // slide in or out
-      overlay.classList.toggle("show");
-    } else {
-      nav.classList.toggle("collapsed");   // small or big
-    }
+  // Open and close the sidebar (tablet and phone)
+  function toggleMenu(open) {
+    nav.classList.toggle("open", open);
+    overlay.classList.toggle("show", open);
   }
-  document.getElementById("toggleBtn").addEventListener("click", toggleMenu);
-  document.getElementById("menuBtn").addEventListener("click", toggleMenu);
-  overlay.addEventListener("click", toggleMenu);
+  document.getElementById("menuBtn").addEventListener("click", () => toggleMenu(true));
+  overlay.addEventListener("click", () => toggleMenu(false));
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") toggleMenu(false);
+  });
 
   // Download all students as a JSON file
   // (Blob = a file made in memory, link.click() starts the download)
