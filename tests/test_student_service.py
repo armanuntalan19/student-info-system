@@ -7,7 +7,9 @@ import unittest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 from services.student_service import StudentService
 
-GOOD = {"student_id": 1001, "name": "Ana", "age": 20, "course": "BSIT", "email": "ana@mail.com"}
+# A correct student, reused by the tests below
+GOOD = {"student_id": "2024001", "name": "Ana", "age": 20, "course": "BSIT",
+        "email": "ana@panpacificu.edu.ph"}
 
 
 class TestStudentService(unittest.TestCase):
@@ -17,7 +19,7 @@ class TestStudentService(unittest.TestCase):
         self.service = StudentService(self.file, logging.getLogger("test"))
 
     def test_add_and_get(self):
-        added = self.service.add(GOOD)
+        added = self.service.add(GOOD)            # add, then read it back
         self.assertEqual(self.service.get(added["student_id"])["name"], "Ana")
 
     def test_update(self):
@@ -28,7 +30,7 @@ class TestStudentService(unittest.TestCase):
     def test_delete(self):
         added = self.service.add(GOOD)
         self.service.delete(added["student_id"])
-        self.assertEqual(self.service.get_all(), [])
+        self.assertEqual(self.service.get_all(), [])   # the list is empty again
 
     def test_invalid_email(self):
         with self.assertRaises(ValueError):
@@ -40,23 +42,27 @@ class TestStudentService(unittest.TestCase):
         self.assertEqual(len(self.service.get_all("xyz")), 0)
 
     def test_delete_not_found(self):
-        with self.assertRaises(LookupError):
-            self.service.delete(999)
+        with self.assertRaises(LookupError):      # must raise an error
+            self.service.delete("9999999")
 
     def test_admin_id_is_used(self):
-        added = self.service.add(dict(GOOD, student_id="20240001"))
-        self.assertEqual(added["student_id"], 20240001)
+        added = self.service.add(dict(GOOD, student_id="0012345"))
+        self.assertEqual(added["student_id"], "0012345")   # leading zeros are kept
 
     def test_duplicate_id(self):
         self.service.add(GOOD)
         with self.assertRaises(ValueError):
             self.service.add(dict(GOOD, name="Ben"))
 
-    def test_invalid_id(self):
+    def test_id_must_be_7_digits(self):
+        # too short, too long, letters, empty and with a space
+        for bad_id in ["abc", "", "123456", "12345678", "12 4567"]:
+            with self.assertRaises(ValueError):
+                self.service.add(dict(GOOD, student_id=bad_id))
+
+    def test_email_must_be_school_email(self):
         with self.assertRaises(ValueError):
-            self.service.add(dict(GOOD, student_id="abc"))
-        with self.assertRaises(ValueError):
-            self.service.add(dict(GOOD, student_id=""))
+            self.service.add(dict(GOOD, email="ana@gmail.com"))
 
     def test_broken_file_is_backed_up(self):
         with open(self.file, "w") as f:
