@@ -61,16 +61,20 @@ def delete():
 def search():
     show(service.get_all(input("Search name or course: ")))
 
-
+def export():
+    name = input("File name (press Enter for students_export.json): ").strip()
+    service.export(name or "students_export.json")
+    print("Exported!")
+    
 # Each menu number runs one function
-MENU = {"1": add, "2": view, "3": update, "4": delete, "5": search}
+MENU = {"1": add, "2": view, "3": update, "4": delete, "5": search, "6": export}
 
 
 def main():
     logger.info("App started")
     while True:                               # keep showing the menu until 0
         print("\n=== Student Information System ===")
-        print("1. Add  2. View  3. Update  4. Delete  5. Search  0. Exit")
+        print("1. Add  2. View  3. Update  4. Delete  5. Search  6. Export  0. Exit")
         choice = input("Choose: ")
         if choice == "0":
             logger.info("App closed")
