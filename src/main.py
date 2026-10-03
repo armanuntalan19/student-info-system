@@ -15,10 +15,16 @@ def show(students):
         print(f"{s['student_id']}. {s['name']} | {s['age']} | {s['course']} | {s['email']}")
 
 
-# Ask for the student details
-def ask_details():
-    return {"name": input("Name: "), "age": input("Age: "),
-            "course": input("Course: "), "email": input("Email: ")}
+# Ask for the student details (the ID is only asked when adding)
+def ask_details(ask_student_id=False):
+    details = {}
+    if ask_student_id:
+        details["student_id"] = input("Student ID: ")
+    details["name"] = input("Name: ")
+    details["age"] = input("Age: ")
+    details["course"] = input("Course: ")
+    details["email"] = input("Email: ")
+    return details
 
 
 # Ask for a student id (must be a number)
@@ -31,7 +37,7 @@ def ask_id():
 
 # Menu choices
 def add():
-    service.add(ask_details())
+    service.add(ask_details(ask_student_id=True))
     print("Student added!")
 
 

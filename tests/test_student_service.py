@@ -7,7 +7,7 @@ import unittest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 from services.student_service import StudentService
 
-GOOD = {"name": "Ana", "age": 20, "course": "BSIT", "email": "ana@mail.com"}
+GOOD = {"student_id": 1001, "name": "Ana", "age": 20, "course": "BSIT", "email": "ana@mail.com"}
 
 
 class TestStudentService(unittest.TestCase):
@@ -42,6 +42,28 @@ class TestStudentService(unittest.TestCase):
     def test_delete_not_found(self):
         with self.assertRaises(LookupError):
             self.service.delete(999)
+
+    def test_admin_id_is_used(self):
+        added = self.service.add(dict(GOOD, student_id="20240001"))
+        self.assertEqual(added["student_id"], 20240001)
+
+    def test_duplicate_id(self):
+        self.service.add(GOOD)
+        with self.assertRaises(ValueError):
+            self.service.add(dict(GOOD, name="Ben"))
+
+    def test_invalid_id(self):
+        with self.assertRaises(ValueError):
+            self.service.add(dict(GOOD, student_id="abc"))
+        with self.assertRaises(ValueError):
+            self.service.add(dict(GOOD, student_id=""))
+
+    def test_broken_file_is_backed_up(self):
+        with open(self.file, "w") as f:
+            f.write("{ not json")
+        self.assertEqual(self.service.get_all(), [])
+        self.assertTrue(os.path.exists(self.file + ".bak"))
+
 
 if __name__ == "__main__":
     unittest.main()

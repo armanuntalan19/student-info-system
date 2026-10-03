@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Students - Student Information System</title>
+  <link rel="icon" type="image/png" href="images/logo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
+</head>
+<body data-page="students">
+
+  <div class="shell">
+    <nav class="nav" id="nav"></nav>
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <header class="topbar">
+        <img src="images/logo1.png" alt="Logo">
+        <strong>Student System</strong>
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu"><i class="ti ti-menu-2"></i></button>
+      </header>
+
+      <div class="content">
+        <div class="page-head">
+          <h1>View Students</h1>
+          <p>Search, edit or delete student records.</p>
+        </div>
+        <div class="card">
+          <div class="table-tools">
+            <input type="text" id="search" placeholder="Search by ID, name or course">
+            <span id="count"></span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>ID</th><th>Name</th><th>Age</th><th>Course</th><th>Email</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="studentList"></tbody>
+            </table>
+          </div>
+          <p class="message empty" id="message"></p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/students.js"></script>
+</body>
+</html>
