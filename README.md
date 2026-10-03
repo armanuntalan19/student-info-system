@@ -17,7 +17,7 @@ https://armanuntalan19.github.io/student-info-system/
 - Config file (`config/config.json`) and log file (`logs/app.log`)
 - Error handling and error recovery (a broken data file is backed up as `.bak`, saving uses a temp file)
 - Unit tests
-- Export students to JSON (web version)
+- Export students to JSON (web version and console menu option 6)
 - Responsive web design (phone, iPad and desktop) with a sidebar toggle button
 - Logs are written to logs/app.log when the app runs (not uploaded to GitHub)
 

@@ -4,9 +4,38 @@
   background: var(--navy);
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: relative;      /* so the toggle button can sit on its edge */
+  z-index: 100;
   box-shadow: 4px 0 20px rgba(39, 54, 95, 0.2);
-  transition: transform 0.3s ease;
+  transition: width 0.3s ease, transform 0.3s ease;
+}
+
+/* The round button on the edge of the sidebar */
+.nav-toggle {
+  position: absolute;      /* sticks out half outside the sidebar */
+  top: 26px;
+  right: -18px;
+  z-index: 110;
+  width: 36px;
+  height: 28px;
+  border: none;
+  border-radius: 40%;
+  background: var(--white);
+  color: var(--navy);
+  font-size: 17px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(39, 54, 95, 0.35);
+}
+
+.nav-toggle i {
+  transition: transform 0.3s;
+}
+
+.nav.collapsed .nav-toggle i {
+  transform: rotate(180deg);
 }
 
 .nav-brand {
@@ -127,6 +156,26 @@
   justify-content: center;
 }
 
+/* ---------- Small sidebar (icons only), computer screens only ---------- */
+@media (min-width: 901px) {
+  .nav.collapsed {
+    width: 80px;
+  }
+
+  .nav.collapsed .label {
+    display: none;
+  }
+
+  .nav.collapsed .nav-brand,
+  .nav.collapsed .nav-link,
+  .nav.collapsed .nav-btn,
+  .nav.collapsed .nav-user {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 /* ---------- Top bar (only on tablet and phone) ---------- */
 .topbar {
   display: none;
@@ -163,18 +212,26 @@
     font-size: 15px;
   }
 
+  /* Same round button as the sidebar toggle */
   .menu-btn {
-    background: none;
     border: none;
-    color: var(--white);
-    font-size: 26px;
+    border-radius: 40%;
+    background: var(--white);
+    color: var(--navy);
+    font-size: 17px;
     cursor: pointer;
     margin-left: auto;
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Turned around while the menu is closed (like the small sidebar) */
+  .menu-btn i {
+    transform: rotate(180deg);
   }
 
   .nav {
@@ -185,11 +242,16 @@
     width: 280px;
     max-width: 85vw;
     z-index: 200;
-    transform: translateX(-100%);
+    transform: translateX(-100%);   /* hidden off the left side */
   }
 
   .nav.open {
     transform: translateX(0);
+  }
+
+  /* No toggle button inside the sidebar on tablet and phone */
+  .nav .nav-toggle {
+    display: none;
   }
 
   .overlay.show {
