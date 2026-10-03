@@ -76,6 +76,12 @@ class StudentService:
                 return s.to_dict()
         raise LookupError("Student not found")
 
+    # Export all students to another JSON file
+    def export(self, path):
+        with open(path, "w") as f:
+            json.dump([s.to_dict() for s in self._load()], f, indent=2)
+        self.logger.info("Exported students to %s", path)
+
     # Delete
     def delete(self, student_id):
         students = self._load()

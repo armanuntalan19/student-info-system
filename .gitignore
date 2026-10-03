@@ -5,3 +5,4 @@ logs/*.log
 *.bak
 venv/
 .env
+students_export.json

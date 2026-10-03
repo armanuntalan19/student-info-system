@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "student_id": "1234566",
+    "name": "arman",
+    "age": 33,
+    "course": "bsit",
+    "email": "arman@panpacificu.edu.ph"
+  }
+]
