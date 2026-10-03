@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Student - Student Information System</title>
+  <link rel="icon" type="image/png" href="images/logo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
+</head>
+<body data-page="students">
+
+  <div class="shell">
+    <nav class="nav" id="nav"></nav>
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <header class="topbar">
+        <img src="images/logo1.png" alt="Logo">
+        <strong>Student System</strong>
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu"><i class="ti ti-menu-2"></i></button>
+      </header>
+
+      <div class="content">
+        <div class="page-head">
+          <h1>Edit Student</h1>
+          <p>Change the details. The student ID cannot be changed.</p>
+        </div>
+        <div class="card">
+          <div class="form-grid">
+            <div class="field">
+              <label for="student_id">Student ID</label>
+              <input type="text" id="student_id" inputmode="numeric" placeholder="e.g. 20240001" readonly>
+              <span class="hint">This cannot be changed.</span>
+            </div>
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" placeholder="Full name">
+            </div>
+            <div class="field">
+              <label for="age">Age</label>
+              <input type="number" id="age" placeholder="1 to 120">
+            </div>
+            <div class="field">
+              <label for="course">Course</label>
+              <input type="text" id="course" placeholder="e.g. BSIT">
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="text" id="email" placeholder="name@mail.com">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-save" id="saveBtn"><i class="ti ti-device-floppy"></i>Save</button>
+            <a class="btn btn-light" href="students.html">Cancel</a>
+          </div>
+          <p class="message" id="message"></p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/edit.js"></script>
+</body>
+</html>

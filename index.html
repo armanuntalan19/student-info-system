@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Student Information System</title>
+  <link rel="icon" type="image/png" href="images/logo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
+</head>
+<body data-page="dashboard">
+
+  <div class="shell">
+    <nav class="nav" id="nav"></nav>
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+      <header class="topbar">
+        <img src="images/logo1.png" alt="Logo">
+        <strong>Student System</strong>
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu"><i class="ti ti-menu-2"></i></button>
+      </header>
+
+      <div class="content">
+        <div class="page-head">
+          <h1>Dashboard</h1>
+          <p>A quick look at your students.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><p>Total students</p><p class="big-number" id="total">0</p></div>
+          <div class="stat"><p>Courses</p><p class="big-number" id="courses">0</p></div>
+          <div class="stat"><p>Average age</p><p class="big-number" id="avgAge">-</p></div>
+        </div>
+
+        <div class="card">
+          <h2>Latest students</h2>
+          <div id="recent"></div>
+        </div>
+        <a class="btn btn-save" href="add.html"><i class="ti ti-user-plus"></i>Add Student</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

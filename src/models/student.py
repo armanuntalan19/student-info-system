@@ -18,7 +18,16 @@ class Student:
         return Student(data["student_id"], data["name"], data["age"],
                        data["course"], data["email"])
 
-    # Check the data, raise an error if something is wrong
+    # Check the student ID typed by the admin (digits only, up to 12 digits)
+    @staticmethod
+    def validate_id(value):
+        text = str(value).strip()
+        if not text:
+            raise ValueError("student_id is required")
+        if not text.isdigit() or len(text) > 12 or int(text) < 1:
+            raise ValueError("student_id must be a number (digits only)")
+
+    # Check the other fields, raise an error if something is wrong
     @staticmethod
     def validate(data):
         for field in ["name", "age", "course", "email"]:

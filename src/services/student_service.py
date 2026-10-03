@@ -22,21 +22,28 @@ class StudentService:
             self.logger.error("Data file is broken, backup saved as .bak")
             return []
 
-    # Save all students to the JSON file
+    # Save all students to the JSON file.
+    # Write to a temp file first, then swap it in, so a crash while
+    # saving can never leave a half-written data file.
     def _save(self, students):
-        with open(self.data_file, "w") as f:
+        temp_file = self.data_file + ".tmp"
+        with open(temp_file, "w") as f:
             json.dump([s.to_dict() for s in students], f, indent=2)
+        os.replace(temp_file, self.data_file)
 
-    # Create
+    # Create (the admin types the student ID, it must be new)
     def add(self, data):
+        Student.validate_id(data.get("student_id", ""))
         Student.validate(data)
         students = self._load()
-        new_id = max([s.student_id for s in students], default=0) + 1
-        student = Student(new_id, data["name"].strip(), int(data["age"]),
+        student_id = int(data["student_id"])
+        if any(s.student_id == student_id for s in students):
+            raise ValueError("student_id " + str(student_id) + " already exists")
+        student = Student(student_id, data["name"].strip(), int(data["age"]),
                           data["course"].strip(), data["email"].strip())
         students.append(student)
         self._save(students)
-        self.logger.info("Added student %s", new_id)
+        self.logger.info("Added student %s", student_id)
         return student.to_dict()
 
     # Read all (with optional search)
@@ -52,7 +59,7 @@ class StudentService:
                 return s.to_dict()
         raise LookupError("Student not found")
 
-    # Update
+    # Update (the student ID itself cannot be changed)
     def update(self, student_id, data):
         Student.validate(data)
         students = self._load()
