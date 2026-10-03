@@ -4,18 +4,19 @@ const count = document.getElementById("count");
 
 // Show students in the table (with search)
 function loadStudents() {
-  const search = document.getElementById("search").value.toLowerCase();
+  const search = document.getElementById("search").value.toLowerCase();   // text typed in the search box
+  // Keep only the students that match the search
   const students = getStudents().filter(s =>
     s.name.toLowerCase().includes(search) ||
     s.course.toLowerCase().includes(search) ||
-    String(s.student_id).includes(search));
+    s.student_id.includes(search));
 
   // data-label is used by the phone layout
   list.innerHTML = students.map(s => `<tr>
-      <td data-label="ID" class="id-cell">${s.student_id}</td>
-      <td data-label="Name">${clean(s.name)}</td>
+      <td data-label="ID"><span class="chip">${s.student_id}</span></td>
+      <td data-label="Name"><strong>${clean(s.name)}</strong></td>
       <td data-label="Age">${s.age}</td>
-      <td data-label="Course">${clean(s.course)}</td>
+      <td data-label="Course"><span class="chip chip-orange">${clean(s.course)}</span></td>
       <td data-label="Email">${clean(s.email)}</td>
       <td data-label="Actions">
         <a class="btn btn-edit" href="edit.html?id=${s.student_id}"><i class="ti ti-pencil"></i>Edit</a>
@@ -23,23 +24,24 @@ function loadStudents() {
       </td>
     </tr>`).join("");
 
-  count.textContent = students.length + " student(s)";
-  message.textContent = students.length === 0 ? "No students found." : "";
+  count.textContent = students.length + " student(s)";   // show how many
+  // Show a message with an icon when nothing matches
+  message.innerHTML = students.length === 0 ? '<i class="ti ti-mood-empty"></i>No students found.' : "";
   message.className = "message empty";
 }
 
 // Delete a student after asking first
 function deleteStudent(id) {
-  if (!confirm("Delete this student?")) return;
-  saveStudents(getStudents().filter(s => s.student_id !== id));
+  if (!confirm("Delete this student?")) return;   // stop if the user clicks Cancel
+  saveStudents(getStudents().filter(s => s.student_id !== id));   // keep everyone except this ID
   loadStudents();
 }
 
 // Delete button clicks (one listener for the whole table)
 list.addEventListener("click", e => {
-  const button = e.target.closest("[data-id]");
-  if (button) deleteStudent(Number(button.dataset.id));
+  const button = e.target.closest("[data-id]");   // did the click land on a Delete button?
+  if (button) deleteStudent(button.dataset.id);
 });
 
-document.getElementById("search").addEventListener("input", loadStudents);
+document.getElementById("search").addEventListener("input", loadStudents);   // search while typing
 loadStudents();

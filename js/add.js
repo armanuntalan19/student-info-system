@@ -1,6 +1,6 @@
 // When Save is clicked, add the student
 document.getElementById("saveBtn").addEventListener("click", () => {
-  const result = readForm();
+  const result = readForm();   // get the form values, or an error
   if (result.error) return showMessage(result.error, "error");
 
   // The admin types the ID, so make sure nobody else has it
@@ -9,9 +9,9 @@ document.getElementById("saveBtn").addEventListener("click", () => {
     return showMessage("Student ID " + result.student.student_id + " already exists", "error");
   }
 
-  students.push(result.student);
-  saveStudents(students);
+  students.push(result.student);   // add to the list
+  saveStudents(students);          // save the list in the browser
 
   showMessage("Student added!", "success");
-  document.querySelectorAll("input").forEach(i => (i.value = ""));
+  document.querySelectorAll("input").forEach(i => (i.value = ""));   // clear the form
 });

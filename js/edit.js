@@ -1,6 +1,7 @@
-// Get the student id from the web address (edit.html?id=1001)
-const id = Number(new URLSearchParams(window.location.search).get("id"));
+// Get the student id from the web address (edit.html?id=2024001)
+const id = new URLSearchParams(window.location.search).get("id");
 const students = getStudents();
+// Find the student with that ID
 const current = students.find(s => s.student_id === id);
 
 // Fill the form with the current data (the ID cannot be changed)
@@ -16,11 +17,11 @@ if (current) {
 
 // When Save is clicked, update the student
 document.getElementById("saveBtn").addEventListener("click", () => {
-  if (!current) return;
+  if (!current) return;   // nothing to save
   const result = readForm();
   if (result.error) return showMessage(result.error, "error");
 
-  Object.assign(current, result.student);
+  Object.assign(current, result.student);   // copy the new values into the student
   saveStudents(students);
-  window.location.href = "students.html";
+  window.location.href = "students.html";   // go back to the list
 });

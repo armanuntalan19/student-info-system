@@ -14,10 +14,12 @@
 <body data-page="add">
 
   <div class="shell">
+    <!-- sidebar.js fills this with the menu -->
     <nav class="nav" id="nav"></nav>
     <div class="overlay" id="overlay"></div>
 
     <main class="main">
+      <!-- top bar: only shown on tablet and phone -->
       <header class="topbar">
         <img src="images/logo1.png" alt="Logo">
         <strong>Student System</strong>
@@ -26,15 +28,18 @@
 
       <div class="content">
         <div class="page-head">
-          <h1>Add Student</h1>
-          <p>Type the student ID and fill in the details.</p>
+          <div>
+            <h1>Add Student</h1>
+            <p>Type the student ID and fill in the details.</p>
+          </div>
         </div>
         <div class="card">
+          <h2><i class="ti ti-id"></i>Student details</h2>
           <div class="form-grid">
             <div class="field">
               <label for="student_id">Student ID</label>
-              <input type="text" id="student_id" inputmode="numeric" placeholder="e.g. 20240001">
-              <span class="hint">You type this number. It must be new.</span>
+              <input type="text" id="student_id" inputmode="numeric" maxlength="7" placeholder="7 digits, e.g. 2024001">
+              <span class="hint">Exactly 7 digits. It must be new.</span>
             </div>
             <div class="field">
               <label for="name">Name</label>
@@ -50,7 +55,7 @@
             </div>
             <div class="field">
               <label for="email">Email</label>
-              <input type="text" id="email" placeholder="name@mail.com">
+              <input type="text" id="email" placeholder="name@panpacificu.edu.ph">
             </div>
           </div>
           <div class="form-actions">
@@ -63,6 +68,7 @@
     </main>
   </div>
 
+  <!-- shared code first, then this page's own code -->
   <script src="js/storage.js"></script>
   <script src="js/sidebar.js"></script>
   <script src="js/add.js"></script>

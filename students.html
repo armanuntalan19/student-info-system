@@ -14,10 +14,12 @@
 <body data-page="students">
 
   <div class="shell">
+    <!-- sidebar.js fills this with the menu -->
     <nav class="nav" id="nav"></nav>
     <div class="overlay" id="overlay"></div>
 
     <main class="main">
+      <!-- top bar: only shown on tablet and phone -->
       <header class="topbar">
         <img src="images/logo1.png" alt="Logo">
         <strong>Student System</strong>
@@ -26,8 +28,11 @@
 
       <div class="content">
         <div class="page-head">
-          <h1>View Students</h1>
-          <p>Search, edit or delete student records.</p>
+          <div>
+            <h1>View Students</h1>
+            <p>Search, edit or delete student records.</p>
+          </div>
+          <a class="btn btn-save" href="add.html"><i class="ti ti-user-plus"></i>Add Student</a>
         </div>
         <div class="card">
           <div class="table-tools">
@@ -48,6 +53,7 @@
     </main>
   </div>
 
+  <!-- shared code first, then this page's own code -->
   <script src="js/storage.js"></script>
   <script src="js/sidebar.js"></script>
   <script src="js/students.js"></script>

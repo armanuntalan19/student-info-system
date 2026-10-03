@@ -14,10 +14,12 @@
 <body data-page="dashboard">
 
   <div class="shell">
+    <!-- sidebar.js fills this with the menu -->
     <nav class="nav" id="nav"></nav>
     <div class="overlay" id="overlay"></div>
 
     <main class="main">
+      <!-- top bar: only shown on tablet and phone -->
       <header class="topbar">
         <img src="images/logo1.png" alt="Logo">
         <strong>Student System</strong>
@@ -25,25 +27,39 @@
       </header>
 
       <div class="content">
+        <!-- title on the left, button on the right -->
         <div class="page-head">
-          <h1>Dashboard</h1>
-          <p>A quick look at your students.</p>
+          <div>
+            <h1>Dashboard</h1>
+            <p>A quick look at your students.</p>
+          </div>
+          <a class="btn btn-save" href="add.html"><i class="ti ti-user-plus"></i>Add Student</a>
         </div>
+
         <div class="stats">
-          <div class="stat"><p>Total students</p><p class="big-number" id="total">0</p></div>
-          <div class="stat"><p>Courses</p><p class="big-number" id="courses">0</p></div>
-          <div class="stat"><p>Average age</p><p class="big-number" id="avgAge">-</p></div>
+          <div class="stat">
+            <div class="stat-icon orange"><i class="ti ti-users"></i></div>
+            <div><p>Total students</p><p class="big-number" id="total">0</p></div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon navy"><i class="ti ti-books"></i></div>
+            <div><p>Courses</p><p class="big-number" id="courses">0</p></div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon green"><i class="ti ti-chart-bar"></i></div>
+            <div><p>Average age</p><p class="big-number" id="avgAge">-</p></div>
+          </div>
         </div>
 
         <div class="card">
-          <h2>Latest students</h2>
+          <h2><i class="ti ti-clock"></i>Latest students</h2>
           <div id="recent"></div>
         </div>
-        <a class="btn btn-save" href="add.html"><i class="ti ti-user-plus"></i>Add Student</a>
       </div>
     </main>
   </div>
 
+  <!-- shared code first, then this page's own code -->
   <script src="js/storage.js"></script>
   <script src="js/sidebar.js"></script>
   <script src="js/dashboard.js"></script>
