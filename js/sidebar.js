@@ -16,20 +16,21 @@ function initSidebar() {
   // Make one link for each page in NAV_LINKS
   const linksHtml = NAV_LINKS.map(item => `
     <a class="nav-link ${activePage === item.key ? "active" : ""}" href="${item.href}">
-      <i class="ti ${item.icon}"></i><span>${item.label}</span>
+      <i class="ti ${item.icon}"></i><span class="label">${item.label}</span>
     </a>`).join("");
 
   // Put the sidebar HTML inside <nav id="nav">
   nav.innerHTML = `
+    <button type="button" class="nav-toggle" id="toggleBtn" aria-label="Toggle menu"><i class="ti ti-layout-sidebar-left-collapse"></i></button>
     <a class="nav-brand" href="index.html">
       <img src="images/logo1.png" alt="Logo">
-      <div><strong>Student System</strong><small>Information System</small></div>
+      <div class="label"><strong>Student System</strong><small>Information System</small></div>
     </a>
     <div class="nav-links">${linksHtml}</div>
     <div class="nav-bottom">
-      <button type="button" class="nav-btn" id="exportBtn"><i class="ti ti-download"></i>Export JSON</button>
-      <button type="button" class="nav-btn danger" id="clearBtn"><i class="ti ti-trash"></i>Clear All Data</button>
-      <div class="nav-user"><div class="nav-avatar">AD</div>Admin</div>
+      <button type="button" class="nav-btn" id="exportBtn"><i class="ti ti-download"></i><span class="label">Export JSON</span></button>
+      <button type="button" class="nav-btn danger" id="clearBtn"><i class="ti ti-trash"></i><span class="label">Clear All Data</span></button>
+      <div class="nav-user"><div class="nav-avatar">AD</div><span class="label">Admin</span></div>
     </div>`;
 
   wireSidebar();
@@ -40,15 +41,27 @@ function wireSidebar() {
   const nav = document.getElementById("nav");
   const overlay = document.getElementById("overlay");   // dark area behind the open menu
 
-  // Open and close the sidebar (tablet and phone)
-  function toggleMenu(open) {
-    nav.classList.toggle("open", open);
-    overlay.classList.toggle("show", open);
+  // The toggle button:
+  // - on a computer it makes the sidebar small (icons only) or big again
+  // - on a tablet or phone it opens and closes the sidebar
+  function toggleMenu() {
+    if (window.innerWidth <= 900) {
+      nav.classList.toggle("open");        // slide in or out
+      overlay.classList.toggle("show");
+    } else {
+      nav.classList.toggle("collapsed");   // small or big
+    }
   }
-  document.getElementById("menuBtn").addEventListener("click", () => toggleMenu(true));
-  overlay.addEventListener("click", () => toggleMenu(false));
+  const menuBtn = document.getElementById("menuBtn");
+  menuBtn.innerHTML = '<i class="ti ti-layout-sidebar-left-collapse"></i>';   // same icon as the toggle
+
+  document.getElementById("toggleBtn").addEventListener("click", toggleMenu);
+  menuBtn.addEventListener("click", toggleMenu);
+  overlay.addEventListener("click", toggleMenu);
+
+  // Escape key closes the menu on tablet and phone
   document.addEventListener("keydown", e => {
-    if (e.key === "Escape") toggleMenu(false);
+    if (e.key === "Escape" && nav.classList.contains("open")) toggleMenu();
   });
 
   // Download all students as a JSON file
