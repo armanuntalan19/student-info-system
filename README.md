@@ -19,6 +19,7 @@ https://armanuntalan19.github.io/student-info-system/
 - Unit tests
 - Export students to JSON (web version)
 - Responsive web design (phone, iPad and desktop) with a sidebar toggle button
+- Logs are written to logs/app.log when the app runs (not uploaded to GitHub)
 
 ## Project Structure
 ```
