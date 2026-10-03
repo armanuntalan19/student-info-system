@@ -87,6 +87,8 @@ def main():
         except (ValueError, LookupError) as e:   # input or not-found errors
             logger.warning("Rejected: %s", e)
             print("Error:", e)
+        except (EOFError, KeyboardInterrupt):   # Ctrl+Z or Ctrl+C
+            print("\nCancelled.")
         except Exception:                        # any other error
             logger.exception("Unexpected error")
             print("Something went wrong. Check logs/app.log")
