@@ -49,8 +49,6 @@ Open `index.html` in your browser. The web version saves students in the browser
 (localStorage), because GitHub Pages has no server. Use **Export JSON** in the
 sidebar to download the data.
 
-To publish it: GitHub repo -> **Settings -> Pages** -> Branch `main`, folder `/ (root)` -> Save.
-
 ## Run Tests
 ```
 python -m unittest discover tests
