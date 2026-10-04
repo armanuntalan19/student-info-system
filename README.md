@@ -55,5 +55,5 @@ python -m unittest discover tests
 ```
 
 ## Git Workflow
-Each change was made on a feature branch (for example `feature-readme`,
+Most changes were made on a feature branch (for example `feature-readme`,
 `feature-validation`, `feature-unit-tests`) and merged into `main` with a Pull Request.
