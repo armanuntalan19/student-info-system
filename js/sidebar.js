@@ -5,12 +5,12 @@ const NAV_LINKS = [
   { key: "add", label: "Add Student", icon: "ti-user-plus", href: "add.html" }
 ];
 
-// Build the sidebar and put it in the page
+// Build the sidebar and add the menu to the page
 function initSidebar() {
   const nav = document.getElementById("nav");
-  if (!nav) return;   // this page has no sidebar
+  if (!nav) return;
 
-  // Each page sets <body data-page="..."> so we know which link is active
+  // Each page sets <body data-page="..."> to mark the active link
   const activePage = document.body.dataset.page;
 
   // Make one link for each page in NAV_LINKS
@@ -19,7 +19,6 @@ function initSidebar() {
       <i class="ti ${item.icon}"></i><span class="label">${item.label}</span>
     </a>`).join("");
 
-  // Put the sidebar HTML inside <nav id="nav">
   nav.innerHTML = `
     <button type="button" class="nav-toggle" id="toggleBtn" aria-label="Toggle menu"><i class="ti ti-layout-sidebar-left-collapse"></i></button>
     <a class="nav-brand" href="index.html">
@@ -39,27 +38,24 @@ function initSidebar() {
 // Make the sidebar buttons work
 function wireSidebar() {
   const nav = document.getElementById("nav");
-  const overlay = document.getElementById("overlay");   // dark area behind the open menu
+  const overlay = document.getElementById("overlay");
 
-  // The toggle button:
-  // - on a computer it makes the sidebar small (icons only) or big again
-  // - on a tablet or phone it opens and closes the sidebar
+  // The toggle button
   function toggleMenu() {
     if (window.innerWidth <= 900) {
-      nav.classList.toggle("open");        // slide in or out
+      nav.classList.toggle("open");
       overlay.classList.toggle("show");
     } else {
-      nav.classList.toggle("collapsed");   // small or big
+      nav.classList.toggle("collapsed");
     }
   }
   const menuBtn = document.getElementById("menuBtn");
-  menuBtn.innerHTML = '<i class="ti ti-layout-sidebar-left-collapse"></i>';   // same icon as the toggle
+  menuBtn.innerHTML = '<i class="ti ti-layout-sidebar-left-collapse"></i>';
 
   document.getElementById("toggleBtn").addEventListener("click", toggleMenu);
   menuBtn.addEventListener("click", toggleMenu);
   overlay.addEventListener("click", toggleMenu);
 
-  // Escape key closes the menu on tablet and phone
   document.addEventListener("keydown", e => {
     if (e.key === "Escape" && nav.classList.contains("open")) toggleMenu();
   });
@@ -74,11 +70,11 @@ function wireSidebar() {
     link.click();
   });
 
-  // Delete all students
+  // Delete all students after asking first
   document.getElementById("clearBtn").addEventListener("click", () => {
     if (!confirm("Delete ALL students?")) return;
-    saveStudents([]);              // save an empty list
-    window.location.reload();      // refresh the page
+    saveStudents([]);
+    window.location.reload();
   });
 }
 

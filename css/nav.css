@@ -4,15 +4,14 @@
   background: var(--navy);
   display: flex;
   flex-direction: column;
-  position: relative;      /* so the toggle button can sit on its edge */
+  position: relative;
   z-index: 100;
   box-shadow: 4px 0 20px rgba(39, 54, 95, 0.2);
   transition: width 0.3s ease, transform 0.3s ease;
 }
 
-/* The round button on the edge of the sidebar */
 .nav-toggle {
-  position: absolute;      /* sticks out half outside the sidebar */
+  position: absolute;
   top: 26px;
   right: -18px;
   z-index: 110;
@@ -229,7 +228,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   }
 
-  /* Turned around while the menu is closed (like the small sidebar) */
+  /* Flip the icon in the closed state, like the small sidebar */
   .menu-btn i {
     transform: rotate(180deg);
   }

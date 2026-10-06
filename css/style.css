@@ -7,7 +7,7 @@
   --muted: #6b7794;
   --line: #e3e7f0;
   --green: #2a7f62;
-  --navy-soft: #e9ecf5;     /* light versions of the same colors */
+  --navy-soft: #e9ecf5;
   --orange-soft: #fdeee3;
   --green-soft: #e3f3ed;
   --orange-dark: #b85a1c;
@@ -26,7 +26,7 @@ body {
   background: var(--bg);
   color: var(--text);
   height: 100vh;
-  overflow: hidden;        /* only .main scrolls, so the sidebar stays in place */
+  overflow: hidden;
   line-height: 1.5;
 }
 
@@ -42,16 +42,15 @@ a {
 }
 
 .main {
-  flex: 1;                 /* take all the space next to the sidebar */
+  flex: 1;
   min-width: 0;
-  overflow-y: auto;        /* scroll the page content */
+  overflow-y: auto;
 }
 
 .content {
   padding: 32px 40px 48px;
 }
 
-/* Title on the left, button on the right */
 .page-head {
   display: flex;
   justify-content: space-between;
@@ -71,7 +70,6 @@ a {
   font-size: 14px;
 }
 
-/* ---------- Cards ---------- */
 .card {
   background: var(--white);
   padding: 24px;
@@ -81,7 +79,6 @@ a {
   margin-bottom: 24px;
 }
 
-/* Card title: small icon + text + a line under it */
 .card h2 {
   display: flex;
   align-items: center;
@@ -100,7 +97,7 @@ a {
 /* ---------- Dashboard ---------- */
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);   /* 3 equal boxes */
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin-bottom: 24px;
 }
@@ -118,10 +115,9 @@ a {
 }
 
 .stat:hover {
-  transform: translateY(-3px);   /* small lift when the mouse is over it */
+  transform: translateY(-3px);
 }
 
-/* Round colored box that holds the icon */
 .stat-icon {
   width: 54px;
   height: 54px;
@@ -172,7 +168,6 @@ a {
   border-bottom: none;
 }
 
-/* Small label (used for the ID and the course) */
 .chip {
   display: inline-block;
   padding: 3px 12px;
@@ -189,11 +184,11 @@ a {
 }
 
 .recent-item .chip {
-  margin-left: auto;   /* push the ID to the right side */
+  margin-left: auto;
 }
 
 .recent-item:nth-child(even) .avatar {
-  background: var(--orange);   /* every second avatar is orange */
+  background: var(--orange);
 }
 
 .avatar {
@@ -226,7 +221,6 @@ a {
   opacity: 0.4;
 }
 
-/* Hide message boxes that have no text */
 .message:empty {
   display: none;
 }
@@ -234,7 +228,7 @@ a {
 /* ---------- Forms ---------- */
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;   /* 2 columns */
+  grid-template-columns: 1fr 1fr;
   gap: 4px 20px;
 }
 
@@ -320,7 +314,6 @@ input[readonly] {
   flex-wrap: wrap;
 }
 
-/* ---------- Messages ---------- */
 .message {
   margin-top: 14px;
   font-weight: 600;
@@ -335,7 +328,6 @@ input[readonly] {
   color: var(--green);
 }
 
-/* ---------- Table ---------- */
 .table-tools {
   display: flex;
   justify-content: space-between;
@@ -432,7 +424,7 @@ tbody tr:hover {
   }
 
   .page-head .btn {
-    width: 100%;            /* full-width button under the title */
+    width: 100%;
     justify-content: center;
   }
 
@@ -449,8 +441,6 @@ tbody tr:hover {
     max-width: none;
   }
 
-  /* Each table row becomes a small card.
-     data-label in the HTML gives each value its name */
   thead {
     display: none;
   }

@@ -7,19 +7,18 @@ import unittest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 from services.student_service import StudentService
 
-# A correct student, reused by the tests below
+# A valid student reused by the tests below
 GOOD = {"student_id": "2024001", "name": "Ana", "age": 20, "course": "BSIT",
         "email": "ana@panpacificu.edu.ph"}
 
 
 class TestStudentService(unittest.TestCase):
     def setUp(self):
-        # Use a temporary file so real data is not touched
         self.file = os.path.join(tempfile.mkdtemp(), "students.json")
         self.service = StudentService(self.file, logging.getLogger("test"))
 
     def test_add_and_get(self):
-        added = self.service.add(GOOD)            # add, then read it back
+        added = self.service.add(GOOD)
         self.assertEqual(self.service.get(added["student_id"])["name"], "Ana")
 
     def test_update(self):
@@ -30,7 +29,7 @@ class TestStudentService(unittest.TestCase):
     def test_delete(self):
         added = self.service.add(GOOD)
         self.service.delete(added["student_id"])
-        self.assertEqual(self.service.get_all(), [])   # the list is empty again
+        self.assertEqual(self.service.get_all(), [])
 
     def test_invalid_email(self):
         with self.assertRaises(ValueError):
@@ -42,13 +41,14 @@ class TestStudentService(unittest.TestCase):
         self.assertEqual(len(self.service.get_all("xyz")), 0)
 
     def test_delete_not_found(self):
-        with self.assertRaises(LookupError):      # must raise an error
+        with self.assertRaises(LookupError):
             self.service.delete("9999999")
 
     def test_admin_id_is_used(self):
         added = self.service.add(dict(GOOD, student_id="0012345"))
-        self.assertEqual(added["student_id"], "0012345")   # leading zeros are kept
+        self.assertEqual(added["student_id"], "0012345")
 
+    # the same ID twice must fail
     def test_duplicate_id(self):
         self.service.add(GOOD)
         with self.assertRaises(ValueError):
@@ -60,10 +60,12 @@ class TestStudentService(unittest.TestCase):
             with self.assertRaises(ValueError):
                 self.service.add(dict(GOOD, student_id=bad_id))
 
+    # only @panpacificu.edu.ph emails pass
     def test_email_must_be_school_email(self):
         with self.assertRaises(ValueError):
             self.service.add(dict(GOOD, email="ana@gmail.com"))
 
+    # a broken file becomes .bak and the list starts empty
     def test_broken_file_is_backed_up(self):
         with open(self.file, "w") as f:
             f.write("{ not json")

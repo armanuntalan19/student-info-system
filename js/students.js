@@ -4,14 +4,13 @@ const count = document.getElementById("count");
 
 // Show students in the table (with search)
 function loadStudents() {
-  const search = document.getElementById("search").value.toLowerCase();   // text typed in the search box
-  // Keep only the students that match the search
+  const search = document.getElementById("search").value.toLowerCase();
+  // Keep only the matching students
   const students = getStudents().filter(s =>
     s.name.toLowerCase().includes(search) ||
     s.course.toLowerCase().includes(search) ||
     s.student_id.includes(search));
 
-  // data-label is used by the phone layout
   list.innerHTML = students.map(s => `<tr>
       <td data-label="ID"><span class="chip">${s.student_id}</span></td>
       <td data-label="Name"><strong>${clean(s.name)}</strong></td>
@@ -24,7 +23,7 @@ function loadStudents() {
       </td>
     </tr>`).join("");
 
-  count.textContent = students.length + " student(s)";   // show how many
+  count.textContent = students.length + " student(s)";
   // Show a message with an icon when nothing matches
   message.innerHTML = students.length === 0 ? '<i class="ti ti-mood-empty"></i>No students found.' : "";
   message.className = "message empty";
@@ -32,16 +31,16 @@ function loadStudents() {
 
 // Delete a student after asking first
 function deleteStudent(id) {
-  if (!confirm("Delete this student?")) return;   // stop if the user clicks Cancel
-  saveStudents(getStudents().filter(s => s.student_id !== id));   // keep everyone except this ID
+  if (!confirm("Delete this student?")) return;
+  saveStudents(getStudents().filter(s => s.student_id !== id));
   loadStudents();
 }
 
 // Delete button clicks (one listener for the whole table)
 list.addEventListener("click", e => {
-  const button = e.target.closest("[data-id]");   // did the click land on a Delete button?
+  const button = e.target.closest("[data-id]");
   if (button) deleteStudent(button.dataset.id);
 });
 
-document.getElementById("search").addEventListener("input", loadStudents);   // search while typing
+document.getElementById("search").addEventListener("input", loadStudents);
 loadStudents();
